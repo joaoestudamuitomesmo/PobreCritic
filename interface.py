@@ -6,8 +6,9 @@ class CleanUI(tk.Tk):
         super().__init__()
         self.title("Clean UI Example")
         self.geometry("1366x768")
-        self.configure(bg="#F8FAFC")
-        self.setup_login_screen()
+        self.configure(bg="#000000")
+        self.telaLogin()
+        self.resizable(False, False)
 
     def round_rect(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
         points = [
@@ -19,23 +20,30 @@ class CleanUI(tk.Tk):
         ]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def setup_login_screen(self):
-        self.canvas = tk.Canvas(self, bg="#F8FAFC", highlightthickness=0)
+    def telaLogin(self):
+        self.canvas = tk.Canvas(self, bg="#000000", highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
 
-        self.canvas.create_text(683, 180, text="Bem-vindo", font=("Segoe UI", 24, "bold"), fill="#0F172A")
+        self.canvas.create_text(683, 180, text="PobreCritic", font=("Segoe UI", 24, "bold"), fill="#F8FAFC")
 
-        self.round_rect(self.canvas, 433, 230, 933, 530, radius=20, fill="#FFFFFF", outline="#E2E8F0")
+        self.round_rect(self.canvas, 433, 230, 933, 530, radius=20, fill="#111111", outline="#2A2A2A")
 
-        self.canvas.create_text(473, 280, text="Email", font=("Segoe UI", 10), fill="#64748B", anchor="w")
+        self.canvas.create_text(473, 280, text="Email", font=("Segoe UI", 10), fill="#CBD5E1", anchor="w")
 
-        self.round_rect(self.canvas, 473, 300, 893, 350, radius=12, fill="#F8FAFC", outline="#CBD5E1")
+        self.round_rect(self.canvas, 473, 300, 893, 350, radius=12, fill="#0F0F0F", outline="#3F3F46")
         
-        self.user_entry = tk.Entry(self, font=("Segoe UI", 12), bg="#F8FAFC", fg="#0F172A", bd=0, highlightthickness=0, insertbackground="#0F172A")
+        self.user_entry = tk.Entry(self, font=("Segoe UI", 12), bg="#0F0F0F", fg="#F8FAFC", bd=0, highlightthickness=0, insertbackground="#F8FAFC")
         self.user_entry.place(x=485, y=312, width=396, height=26)
 
-        self.btn_shape = self.round_rect(self.canvas, 473, 420, 893, 470, radius=15, fill="#3B82F6")
-        self.btn_text = self.canvas.create_text(683, 445, text="Continuar", font=("Segoe UI", 12, "bold"), fill="#FFFFFF")
+        self.canvas.create_text(473, 380, text="Senha", font=("Segoe UI", 10), fill="#CBD5E1", anchor="w")
+        
+        self.round_rect(self.canvas, 473, 390, 893, 440, radius=12, fill="#0F0F0F", outline="#3F3F46")
+        
+        self.password_entry = tk.Entry(self, font=("Segoe UI", 12), bg="#0F0F0F", fg="#F8FAFC", bd=0, highlightthickness=0, insertbackground="#F8FAFC", show="*")
+        self.password_entry.place(x=485, y=402, width=396, height=26)
+
+        self.btn_shape = self.round_rect(self.canvas, 473, 450, 893, 500, radius=15, fill="#A855F7")
+        self.btn_text = self.canvas.create_text(683, 475, text="Login", font=("Segoe UI", 12, "bold"), fill="#FFFFFF")
 
         self.canvas.tag_bind(self.btn_shape, "<Enter>", self.on_enter)
         self.canvas.tag_bind(self.btn_text, "<Enter>", self.on_enter)
@@ -48,25 +56,25 @@ class CleanUI(tk.Tk):
 
     def on_enter(self, e):
         try:
-            self.canvas.itemconfig(self.btn_shape, fill="#2563EB")
+            self.canvas.itemconfig(self.btn_shape, fill="#8B5CF6")
         except tk.TclError:
             pass
 
     def on_leave(self, e):
         try:
-            self.canvas.itemconfig(self.btn_shape, fill="#3B82F6")
+            self.canvas.itemconfig(self.btn_shape, fill="#A855F7")
         except tk.TclError:
             pass
 
     def on_click(self, e):
         try:
-            self.canvas.itemconfig(self.btn_shape, fill="#1D4ED8")
+            self.canvas.itemconfig(self.btn_shape, fill="#7C3AED")
         except tk.TclError:
             pass
 
     def on_release(self, e):
         try:
-            self.canvas.itemconfig(self.btn_shape, fill="#2563EB")
+            self.canvas.itemconfig(self.btn_shape, fill="#8B5CF6")
             self.after(150, self.open_dashboard)
         except tk.TclError:
             pass
@@ -74,16 +82,17 @@ class CleanUI(tk.Tk):
     def open_dashboard(self):
         self.canvas.destroy()
         self.user_entry.destroy()
+        self.password_entry.destroy()
 
         style = ttk.Style()
         style.theme_use("clam")
         
-        bg_main = "#F8FAFC"
-        card_bg = "#FFFFFF"
-        primary = "#3B82F6"
-        text_color = "#0F172A"
-        muted_color = "#64748B"
-        border_color = "#E2E8F0"
+        bg_main = "#000000"
+        card_bg = "#111111"
+        primary = "#A855F7"
+        text_color = "#F8FAFC"
+        muted_color = "#CBD5E1"
+        border_color = "#2A2A2A"
 
         style.configure(".", background=bg_main, font=("Segoe UI", 10), foreground=text_color)
         
@@ -94,20 +103,20 @@ class CleanUI(tk.Tk):
         style.configure("Card.TFrame", background=card_bg, borderwidth=1, relief="solid")
         
         style.configure("Treeview", background=card_bg, foreground=text_color, rowheight=36, fieldbackground=card_bg, borderwidth=0, font=("Segoe UI", 10))
-        style.configure("Treeview.Heading", background="#F1F5F9", foreground=text_color, font=("Segoe UI", 10, "bold"), borderwidth=0, padding=8)
-        style.map("Treeview", background=[("selected", "#EFF6FF")], foreground=[("selected", primary)])
+        style.configure("Treeview.Heading", background="#1F1F1F", foreground=text_color, font=("Segoe UI", 10, "bold"), borderwidth=0, padding=8)
+        style.map("Treeview", background=[("selected", "#3B0764")], foreground=[("selected", "#FFFFFF")])
         
-        style.configure("TCombobox", fieldbackground="#F8FAFC", background=card_bg, bordercolor=border_color, arrowcolor=muted_color, padding=6)
-        style.configure("TSpinbox", fieldbackground="#F8FAFC", background=card_bg, bordercolor=border_color, arrowcolor=muted_color, padding=6)
+        style.configure("TCombobox", fieldbackground="#111111", background=card_bg, bordercolor=border_color, arrowcolor=muted_color, padding=6)
+        style.configure("TSpinbox", fieldbackground="#111111", background=card_bg, bordercolor=border_color, arrowcolor=muted_color, padding=6)
         
         style.configure("TCheckbutton", background=card_bg, foreground=text_color, font=("Segoe UI", 10))
         style.configure("TRadiobutton", background=card_bg, foreground=text_color, font=("Segoe UI", 10))
         
-        style.configure("THorizontal.TScale", background=card_bg, troughcolor="#E2E8F0", sliderthickness=16)
-        style.configure("TProgressbar", thickness=10, troughcolor="#E2E8F0", background=primary, borderwidth=0)
+        style.configure("THorizontal.TScale", background=card_bg, troughcolor="#2A2A2A", sliderthickness=16)
+        style.configure("TProgressbar", thickness=10, troughcolor="#2A2A2A", background=primary, borderwidth=0)
 
         style.configure("Action.TButton", font=("Segoe UI", 10, "bold"), background=primary, foreground="#FFFFFF", padding=[15, 8], borderwidth=0)
-        style.map("Action.TButton", background=[("active", "#2563EB")])
+        style.map("Action.TButton", background=[("active", "#8B5CF6")])
 
         menubar = Menu(self, bg=card_bg, fg=text_color, activebackground=primary, activeforeground="#FFFFFF", bd=0)
         self.config(menu=menubar)
@@ -126,7 +135,7 @@ class CleanUI(tk.Tk):
         title_label = tk.Label(header, text="Painel do Sistema", font=("Segoe UI", 14, "bold"), bg=card_bg, fg=text_color)
         title_label.pack(side="left", padx=25)
 
-        user_badge = tk.Label(header, text="• Admin Conectado", font=("Segoe UI", 10, "bold"), bg="#DCFCE7", fg="#15803D", padx=10, pady=4)
+        user_badge = tk.Label(header, text="• Admin Conectado", font=("Segoe UI", 10, "bold"), bg="#2E1065", fg="#E9D5FF", padx=10, pady=4)
         user_badge.pack(side="right", padx=25)
 
         notebook = ttk.Notebook(self)
@@ -164,7 +173,7 @@ class CleanUI(tk.Tk):
 
         tk.Label(t1_right, text="Logs do Sistema (Listbox)", font=("Segoe UI", 12, "bold"), bg=card_bg, fg=text_color).pack(anchor="w", padx=20, pady=(20, 10))
 
-        listbox = tk.Listbox(t1_right, font=("Segoe UI", 10), borderwidth=0, highlightthickness=0, bg="#F8FAFC", fg=text_color, selectbackground="#EFF6FF", selectforeground=primary, activestyle="none")
+        listbox = tk.Listbox(t1_right, font=("Segoe UI", 10), borderwidth=0, highlightthickness=0, bg="#111111", fg=text_color, selectbackground="#3B0764", selectforeground="#FFFFFF", activestyle="none")
         for i in range(1, 30):
             listbox.insert("end", f"  [LOG #{i:03d}] Sessão sincronizada com o servidor.")
         listbox.pack(fill="both", expand=True, padx=20, pady=(0, 20))
@@ -213,7 +222,7 @@ class CleanUI(tk.Tk):
         prog.pack(fill="x", padx=20, pady=(5, 20))
 
         tk.Label(t2_right, text="Observações Adicionais:", bg=card_bg, fg=muted_color).pack(anchor="w", padx=20)
-        text_area = tk.Text(t2_right, height=8, font=("Segoe UI", 10), bg="#F8FAFC", fg=text_color, bd=0, highlightthickness=1, highlightbackground=border_color, padx=10, pady=10)
+        text_area = tk.Text(t2_right, height=8, font=("Segoe UI", 10), bg="#111111", fg=text_color, bd=0, highlightthickness=1, highlightbackground=border_color, padx=10, pady=10)
         text_area.insert("1.0", "Digite notas internas ou observações aqui...")
         text_area.pack(fill="both", expand=True, padx=20, pady=(5, 20))
 
@@ -231,7 +240,7 @@ class CleanUI(tk.Tk):
         tk.Label(pane1, text="Navegação", font=("Segoe UI", 12, "bold"), bg=card_bg, fg=text_color).pack(pady=20)
         
         for item in ["Módulo 01 - Analytics", "Módulo 02 - Vendas", "Módulo 03 - Financeiro", "Módulo 04 - Suporte"]:
-            lbl = tk.Label(pane1, text=item, font=("Segoe UI", 10), bg="#F8FAFC", fg=text_color, anchor="w", padx=15, pady=10, cursor="hand2")
+            lbl = tk.Label(pane1, text=item, font=("Segoe UI", 10), bg="#111111", fg=text_color, anchor="w", padx=15, pady=10, cursor="hand2")
             lbl.pack(fill="x", padx=15, pady=4)
 
         canvas_demo = tk.Canvas(pane2, bg=card_bg, highlightthickness=0)
@@ -239,13 +248,13 @@ class CleanUI(tk.Tk):
 
         canvas_demo.create_text(20, 20, text="Métricas Visuais (Canvas Component)", font=("Segoe UI", 12, "bold"), fill=text_color, anchor="nw")
 
-        self.round_rect(canvas_demo, 20, 60, 240, 180, radius=15, fill="#EFF6FF", outline="")
+        self.round_rect(canvas_demo, 20, 60, 240, 180, radius=15, fill="#1F1233", outline="")
         canvas_demo.create_text(40, 90, text="Total de Vendas", font=("Segoe UI", 10), fill=muted_color, anchor="w")
         canvas_demo.create_text(40, 130, text="R$ 48.290", font=("Segoe UI", 20, "bold"), fill=primary, anchor="w")
 
-        self.round_rect(canvas_demo, 260, 60, 480, 180, radius=15, fill="#ECFDF5", outline="")
+        self.round_rect(canvas_demo, 260, 60, 480, 180, radius=15, fill="#1B142A", outline="")
         canvas_demo.create_text(280, 90, text="Novos Clientes", font=("Segoe UI", 10), fill=muted_color, anchor="w")
-        canvas_demo.create_text(280, 130, text="+ 1,240", font=("Segoe UI", 20, "bold"), fill="#10B981", anchor="w")
+        canvas_demo.create_text(280, 130, text="+ 1,240", font=("Segoe UI", 20, "bold"), fill="#D8B4FE", anchor="w")
 
         canvas_demo.create_line(20, 240, 740, 240, fill=border_color, width=1)
 
