@@ -1,9 +1,12 @@
-from interface import CleanUI
-import dados
+import tkinter as tk
+from interface import Interface
+
 
 def main():
-    app = CleanUI()
-    app.mainloop()
+    root = tk.Tk()
+    app = Interface(root)
+    root.mainloop()
+
 
 if __name__ == "__main__":
     main()
