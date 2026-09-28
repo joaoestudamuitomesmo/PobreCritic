@@ -18,6 +18,7 @@ Clone o repositório ou descarregue os ficheiros do projeto para a sua máquina 
 
 Bash
 git clone https://github.com/joaoestudamuitomesmo/PobreCritic
+
 cd PobreCritic
 
 ### Execução
