@@ -1,5 +1,7 @@
 <img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/ae618b17-2303-4d39-9ab1-1ff985dfd92d" />
 
+Documento questões, proposta, plano de registros : https://docs.google.com/document/d/1felfy4vzsGF0fjuB2naOddFZ2AY8JEuR_EoAsHj5Na0/edit?usp=sharing
+
 ## Interface em TKInter
 Uma aplicação desenvolvida em Python que demonstra uma interface com tema escuro e componentes personalizados utilizando a biblioteca nativa tkinter e ttk.
 
